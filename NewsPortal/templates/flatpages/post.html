@@ -1,0 +1,24 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+News
+{% endblock title %}
+
+{% block content %}
+     <h1>Новости</h1>
+     {{object_list.count}}
+     {{Post.objects.all().order_by()}}
+        <table>
+           {% for news in post %}
+           <tr>
+                <h3>{{post.title_post}}</h3>
+           </tr>
+           <tr>
+                <h3>{{ time_in|date:'M d Y' }}</h3>
+           </tr>
+           <tr>
+                <h3>{{post.text|truncatewords:2 }}</h3>
+           </tr>
+           {% endfor %}
+        </table>
+{% endblock content %}
