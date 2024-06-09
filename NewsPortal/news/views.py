@@ -1,8 +1,6 @@
-from django.shortcuts import render
-from datetime import datetime
 from django.views.generic import ListView, DetailView
 from .models import Post
-
+from .filters import PostFilter
 
 class PostList(ListView):
     model = Post
@@ -10,6 +8,12 @@ class PostList(ListView):
     template_name = 'post.html'
     context_object_name = 'post'
     order_by = '- time_in'
+    paginate_by = 10
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        self.filterset = PostFilter(self.request.GET, queryset)
+        return self.filterset.qs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

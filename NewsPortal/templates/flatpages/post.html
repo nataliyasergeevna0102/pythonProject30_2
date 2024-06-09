@@ -11,14 +11,29 @@ News
         <table>
            {% for news in post %}
            <tr>
-                <h3>{{post.title_post}}</h3>
+                <h2>{{post.title_post}}</h2>
            </tr>
            <tr>
-                <h3>{{ time_in|date:'M d Y' }}</h3>
+                <h2>{{ time_in|date:'M d Y' }}</h2>
            </tr>
            <tr>
-                <h3>{{post.text|truncatewords:2 }}</h3>
+                <h2>{{post.text|truncatewords:2 }}</h2>
            </tr>
            {% endfor %}
         </table>
+     {% if page_obj.has_previous %}
+       <a href="?page=1">1</a>
+       {% if page_obj.previous_page_number != 1 %}
+           ...
+           <a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+       {% endif %}
+     {% endif %}
+     {{ page_obj.number }}
+     {% if page_obj.has_next %}
+       <a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+       {% if paginator.num_pages != page_obj.next_page_number %}
+           ...
+           <a href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+       {% endif %}
+     {% endif %}
 {% endblock content %}
