@@ -1,5 +1,5 @@
 {% extends 'flatpages/default.html' %}
-
+{% load center_words %}
 {% block title %}
 News
 {% endblock title %}
@@ -11,13 +11,13 @@ News
         <table>
            {% for news in post %}
            <tr>
-                <h2>{{post.title_post}}</h2>
+                <h2>{{post.title_post|censor}}</h2>
            </tr>
            <tr>
                 <h2>{{ time_in|date:'M d Y' }}</h2>
            </tr>
            <tr>
-                <h2>{{post.text|truncatewords:2 }}</h2>
+                <h2>{{post.text|truncatewords:2|censor }}</h2>
            </tr>
            {% endfor %}
         </table>
