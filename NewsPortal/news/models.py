@@ -31,9 +31,10 @@ class Category(models.Model):
         return self.topic.title()
 
 
-TYPE_TEXT = {
-    "NEWS": "Новость", "ARTI": "Статья"}
-
+TYPE_TEXT = [
+    ("NEWS", "Новость"),
+    ("ARTI", "Статья")
+]
 
 class Post(models.Model):
     article_rating = models.IntegerField(default=0)
